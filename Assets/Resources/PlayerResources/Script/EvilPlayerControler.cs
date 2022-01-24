@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class PlayerController : MonoBehaviour
+public class EvilPlayerControler: MonoBehaviour
 {
   public Animator animator;
 
   public float speed;
-
-  public float jump;
-
-  public bool crouching;
-
+    
   public Rigidbody2D rigidboddy2D;
 
+  public bool Iscrouching;
+  public bool Platform;
+
+  public Collider2D groundCheck;
+      
+  
   private void Awake() 
     {
       Debug.Log("Player controller awake");
@@ -43,46 +45,68 @@ public class PlayerController : MonoBehaviour
       // move character vertically
       if(vertical > 0)
       {
-          rigidboddy2D.AddForce(new Vector2(0f, jump), ForceMode2D.Force);
+          rigidboddy2D.AddForce(new Vector2(0f, 0), ForceMode2D.Force);
       }
   }   
 
 
   private void PlayMovementAnimations(float horizontal, float vertical)
   {
+    //horizontal
     
-      animator.SetFloat("Speed", Mathf.Abs(horizontal));
+      animator.SetFloat("Speed", Mathf.Abs(horizontal*speed));
       Vector3 scale = transform.localScale;
+    {
       if(horizontal < 0)
       {
-        scale.x = -1f * Mathf.Abs(scale.x);
+      scale.x = -1f * Mathf.Abs(scale.x);
+      transform.localScale= scale;
       }
       else if (horizontal > 0)
       {
       scale.x = Mathf.Abs(scale.x);
       transform.localScale = scale;
       }
-         //crouching
-      else if(Input.GetKeyDown(KeyCode.C))
+
+    }
+    
+    //crouching
+    {
+      if(Input.GetKeyDown(KeyCode.C))
       {
-      animator.SetBool("Crouch",true);
-      crouching = true;
+        animator.SetBool("Crouch",true);
+        Iscrouching = true;
       }
       else if(Input.GetKeyUp(KeyCode.C))
+        animator.SetBool("Crouch", false);
+        Iscrouching = false;
+    }
+    //jump
+    {
+      if(Input.GetKeyDown(KeyCode.Space))
       {
-      animator.SetBool("Crouch",false);
-      crouching = false;
+        animator.SetTrigger("Jump");
       }
-       //jump
-      else if(vertical > 0)
-      {
-          animator.SetBool("Jump", true);
-      }
-      else
-      {
-          animator.SetBool("Jump",false);
-      }
-  } 
+    }
+    void OnCollisionStay2D(Collision2D other) 
+    {
+        if (other.gameObject.tag == "Ground")
+        {
+            if(!groundCheck.IsTouching(other.collider))
+                {return;}
+         Platform = true;
+        }
+    }
+    void OnCollisionExit2D(Collision2D other) 
+    {
+        if (other.gameObject.tag == "Ground")
+        {
+            if(groundCheck.IsTouching(other.collider))
+                {return;}
+         Platform = false;
+        }
+    }    
+  }
+
+
 }
-  
-  
