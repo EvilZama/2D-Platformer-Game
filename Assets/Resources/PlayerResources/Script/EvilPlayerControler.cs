@@ -13,6 +13,7 @@ public class EvilPlayerControler: MonoBehaviour
 
   public bool Iscrouching;
   public bool Platform;
+  public float jump;
 
   public Collider2D groundCheck;
       
@@ -45,7 +46,7 @@ public class EvilPlayerControler: MonoBehaviour
       // move character vertically
       if(vertical > 0)
       {
-          rigidboddy2D.AddForce(new Vector2(0f, 0), ForceMode2D.Force);
+          rigidboddy2D.AddForce(new Vector2(0f, jump), ForceMode2D.Force);
       }
   }   
 
@@ -88,24 +89,24 @@ public class EvilPlayerControler: MonoBehaviour
         animator.SetTrigger("Jump");
       }
     }
-    void OnCollisionStay2D(Collision2D other) 
-    {
-        if (other.gameObject.tag == "Ground")
-        {
-            if(!groundCheck.IsTouching(other.collider))
-                {return;}
-         Platform = true;
-        }
-    }
-    void OnCollisionExit2D(Collision2D other) 
-    {
-        if (other.gameObject.tag == "Ground")
-        {
-            if(groundCheck.IsTouching(other.collider))
-                {return;}
-         Platform = false;
-        }
-    }    
+    // void OnCollisionStay2D(Collision2D other) 
+    // {
+    //     if (other.gameObject.tag == "Ground")
+    //     {
+    //         if(!groundCheck.IsTouching(other.collider))
+    //             {return;}
+    //      Platform = true;
+    //     }
+    // }
+    // void OnCollisionExit2D(Collision2D other) 
+    // {
+    //     if (other.gameObject.tag == "Ground")
+    //     {
+    //         if(groundCheck.IsTouching(other.collider))
+    //             {return;}
+    //      Platform = false;
+    //     }
+    // }    
   }
 
 
