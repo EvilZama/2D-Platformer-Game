@@ -44,70 +44,76 @@ public class EvilPlayerControler: MonoBehaviour
       transform.position = position;
 
       // move character vertically
-      if(vertical > 0)
-      {
-          rigidboddy2D.AddForce(new Vector2(0f, jump), ForceMode2D.Force);
-      }
+      // if(vertical > 0)
+      // {
+      //     rigidboddy2D.AddForce(new Vector2(0f, jump), ForceMode2D.Force);  
+      // }
   }   
 
 
   private void PlayMovementAnimations(float horizontal, float vertical)
-  {
-    //horizontal
-    
-      animator.SetFloat("Speed", Mathf.Abs(horizontal*speed));
-      Vector3 scale = transform.localScale;
     {
-      if(horizontal < 0)
-      {
-      scale.x = -1f * Mathf.Abs(scale.x);
-      transform.localScale= scale;
-      }
-      else if (horizontal > 0)
-      {
-      scale.x = Mathf.Abs(scale.x);
-      transform.localScale = scale;
-      }
+        //horizontal
 
+        this.horizontal(horizontal);
+        //crouching
+        crouching();
+        //jump
+        Jump();
+        // void OnCollisionStay2D(Collision2D other) 
+        // {
+        //     if (other.gameObject.tag == "Ground")
+        //     {
+        //         if(!groundCheck.IsTouching(other.collider))
+        //             {return;}
+        //      Platform = true;
+        //     }
+        // }
+        // void OnCollisionExit2D(Collision2D other) 
+        // {
+        //     if (other.gameObject.tag == "Ground")
+        //     {
+        //         if(groundCheck.IsTouching(other.collider))
+        //             {return;}
+        //      Platform = false;
+        //     }
+        // }    
     }
-    
-    //crouching
+
+    private void horizontal(float horizontal)
     {
-      if(Input.GetKeyDown(KeyCode.C))
-      {
-        animator.SetBool("Crouch",true);
-        Iscrouching = true;
-      }
-      else if(Input.GetKeyUp(KeyCode.C))
-        animator.SetBool("Crouch", false);
+        animator.SetFloat("Speed", Mathf.Abs(horizontal * speed));
+        Vector3 scale = transform.localScale;
+        if (horizontal < 0)
+        {
+            scale.x = -1f * Mathf.Abs(scale.x);
+            transform.localScale = scale;
+        }
+        else if (horizontal > 0)
+        {
+            scale.x = Mathf.Abs(scale.x);
+            transform.localScale = scale;
+        }
+    }
+
+    private void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            animator.SetTrigger("Jump");
+            rigidboddy2D.velocity= Vector2.up*jump;
+        }
+    }
+
+    private void crouching()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            animator.SetBool("Crouch", true);
+            Iscrouching = true;
+        }
+        else if (Input.GetKeyUp(KeyCode.C))
+            animator.SetBool("Crouch", false);
         Iscrouching = false;
     }
-    //jump
-    {
-      if(Input.GetKeyDown(KeyCode.Space))
-      {
-        animator.SetTrigger("Jump");
-      }
-    }
-    // void OnCollisionStay2D(Collision2D other) 
-    // {
-    //     if (other.gameObject.tag == "Ground")
-    //     {
-    //         if(!groundCheck.IsTouching(other.collider))
-    //             {return;}
-    //      Platform = true;
-    //     }
-    // }
-    // void OnCollisionExit2D(Collision2D other) 
-    // {
-    //     if (other.gameObject.tag == "Ground")
-    //     {
-    //         if(groundCheck.IsTouching(other.collider))
-    //             {return;}
-    //      Platform = false;
-    //     }
-    // }    
-  }
-
-
 }
