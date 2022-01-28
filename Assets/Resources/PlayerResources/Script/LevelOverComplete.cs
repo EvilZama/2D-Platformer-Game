@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class LevelOverComplete : MonoBehaviour
 {
+    // public void StartTheGame;
    
    private void  OnTriggerEnter2D(Collider2D collision)
     {
+        // if(collision.gameObject.GetComponent<EvilPlayerControler>() !=null)
+        // {
+        //     SceneManager.LoadScene(1);
+        // }
         if(collision.gameObject.GetComponent<EvilPlayerControler>() != null) 
         {
-            Debug.Log("Level Complted player is reached the end");
-        }        
+            Debug.Log("Level Key is Opened");
+            
+        }
+                
     }
     // public void Level1() 
     // {
