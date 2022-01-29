@@ -1,8 +1,9 @@
+using Assets.Resources.PlayerResources.Script;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelOverComplete : MonoBehaviour
+public class LevelUnlockKey : MonoBehaviour
 {
     // public void StartTheGame;
    
@@ -16,16 +17,7 @@ public class LevelOverComplete : MonoBehaviour
         {
             Debug.Log("Level Key is Opened");
             
-        }
-                
-    }
-    // public void Level1() 
-    // {
-    //     SceneManager.LoadScene(0);
-    // }
-
-    // public void Level2() 
-    // {
-    //     SceneManager.LoadScene(1);
-    // }
+            
+        }            
+    }   
 }
