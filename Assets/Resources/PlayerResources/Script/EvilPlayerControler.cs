@@ -77,7 +77,7 @@ namespace Assets.Resources.PlayerResources.Script
                 rigidboddy2D.velocity = Vector2.up * jump;
             }
         }
-
+        
         private void crouching()
         {
             if (Input.GetKeyDown(KeyCode.C))
