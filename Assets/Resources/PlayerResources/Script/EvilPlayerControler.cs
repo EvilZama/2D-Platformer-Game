@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 namespace Assets.Resources.PlayerResources.Script
 
 {
@@ -15,6 +17,22 @@ namespace Assets.Resources.PlayerResources.Script
         public bool Platform;
         public float jump;
         public Collider2D groundCheck;
+
+        
+        // enemey creation 
+        
+        public void KillPlayer()
+        {
+            Debug.Log("Player is Killed");
+            animator.SetTrigger("Death");
+            ReloadLevel();
+        }
+        //reload the level after player die
+        private void ReloadLevel()
+        {
+            SceneManager.LoadScene(0);
+        }
+
         public Transform spawnPosition;
 
         public void PickUpCoin()
