@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ namespace Assets.Resources.PlayerResources.Script
 {
     public class EvilPlayerControler : MonoBehaviour
     {
+        public ScoreController scoreController;
         public Animator animator;
         public float speed;
         public Rigidbody2D rigidboddy2D;
@@ -14,6 +16,13 @@ namespace Assets.Resources.PlayerResources.Script
         public float jump;
         public Collider2D groundCheck;
         public Transform spawnPosition;
+
+        public void PickUpCoin()
+        {
+            Debug.Log("Player collect the coin");
+            scoreController.IncreaseScore(1);
+        }
+
         public Transform PlayerTransofrm;
 
         private void Awake()
