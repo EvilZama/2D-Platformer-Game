@@ -14,9 +14,9 @@ namespace Assets.Resources.PlayerResources.Script
         public float speed;
         public Rigidbody2D rigidboddy2D;
         public bool Iscrouching;
-        public bool Platform;
+        //public bool Platform;
         public float jump;
-        public Collider2D groundCheck;
+        //public Collider2D groundCheck;
 
         
         // enemey creation 
