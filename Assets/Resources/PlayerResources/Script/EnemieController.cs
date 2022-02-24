@@ -45,13 +45,16 @@ public class EnemieController : MonoBehaviour
             Debug.Log("Enemie NOT Hitting Ground");
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.GetComponent<EvilPlayerControler>() != null)
-        {
-            EvilPlayerControler evilPlayerControler = collision.gameObject.GetComponent<EvilPlayerControler>();
-            evilPlayerControler.KillPlayer();
+#region // collision to player to die whenit touch the enemie
+    
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+        //if (collision.gameObject.GetComponent<EvilPlayerControler>() != null)
+      //  {
+          //  EvilPlayerControler evilPlayerControler = collision.gameObject.GetComponent<EvilPlayerControler>();
+            //evilPlayerControler.KillPlayer();
             
-        }
-    }
+        //}
+    //}
+#endregion
 }

@@ -47,7 +47,7 @@ public class PatrolEnemie : MonoBehaviour
     }
     public void FixedUpate()
     {
-        rigidbody2D velocity = new Vector2(speed, rigidbody2D.velocity.y);
+        rigidbody2D.velocity = new Vector2(speed, rigidbody2D.velocity.y);
     }
 
 
@@ -72,10 +72,3 @@ public class PatrolEnemie : MonoBehaviour
 
 }
 
-internal class rigidbody2D
-{
-    public static implicit operator rigidbody2D(Vector2 v)
-    {
-        throw new NotImplementedException();
-    }
-}
