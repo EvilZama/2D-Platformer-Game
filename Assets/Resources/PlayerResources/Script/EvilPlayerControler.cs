@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 namespace Assets.Resources.PlayerResources.Script
 
 {
@@ -11,10 +13,33 @@ namespace Assets.Resources.PlayerResources.Script
         public Animator animator;
         public float speed;
         public Rigidbody2D rigidboddy2D;
-        public bool Iscrouching;
-        public bool Platform;
+        public float Iscrouching;
+        
+        //public bool Platform;
         public float jump;
-        public Collider2D groundCheck;
+
+        internal void SetTrigger(string v)
+        {
+            throw new NotImplementedException();
+        }
+
+        //public Collider2D groundCheck;
+
+
+        // enemey creation 
+
+        public void KillPlayer()
+        {
+            Debug.Log("Player is Killed");
+            animator.SetTrigger("Death");
+           // ReloadLevel();
+        }
+        //reload the level after player die
+        private void ReloadLevel()
+        {
+            SceneManager.LoadScene(0);
+        }
+
         public Transform spawnPosition;
 
         public void PickUpCoin()
@@ -91,13 +116,9 @@ namespace Assets.Resources.PlayerResources.Script
         {
             if (Input.GetKeyDown(KeyCode.C))
             {
-                animator.SetBool("Crouch", true);
-                Iscrouching = true;
-                speed = 0;
+                animator.SetTrigger("Crouch");
+                rigidboddy2D.velocity = Vector2.up * Iscrouching;
             }
-            else if (Input.GetKeyUp(KeyCode.C))
-                animator.SetBool("Crouch", false);
-                Iscrouching = false;
         }
 
         //respawnPlayer

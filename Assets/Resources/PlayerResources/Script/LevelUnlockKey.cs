@@ -16,8 +16,6 @@ public class LevelUnlockKey : MonoBehaviour
         if(collision.gameObject.GetComponent<EvilPlayerControler>() != null) 
         {
             Debug.Log("Level Key is Opened");
-            
-            
         }            
     }   
 }
